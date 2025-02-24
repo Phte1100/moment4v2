@@ -7,6 +7,11 @@ namespace moment4v2.Models
         public required string Title { get; set; }
         public required int Length { get; set; }
         public required string Category { get; set; }
+        
+        // Foreign key för Album
+        public int AlbumId { get; set; }
+        // Navigation property – en låt hör till ett album
+        public Album? Album { get; set; }
     }
 }
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using moment4v2.Data;
 using moment4v2.Models;
+using moment4v2.DTOs;
 
 namespace moment4v2.Controllers
 {
@@ -25,7 +26,7 @@ namespace moment4v2.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Song>>> GetSongs()
         {
-            return await _context.Songs.ToListAsync();
+            return await _context.Songs.Include(s => s.Album).ToListAsync();
         }
 
         // GET: api/Songs/5
@@ -76,8 +77,25 @@ namespace moment4v2.Controllers
         // POST: api/Songs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Song>> PostSong(Song song)
+        public async Task<ActionResult<Song>> PostSong(SongDto songDto)
         {
+            // Slå upp albumet baserat på titeln
+            var album = await _context.Albums.FirstOrDefaultAsync(a => a.Title == songDto.AlbumTitle);
+            if (album == null)
+            {
+                return BadRequest($"Album med titeln '{songDto.AlbumTitle}' hittades inte.");
+            }
+
+            // Skapa ett nytt Song-objekt och sätt egenskaperna från DTO:n
+            var song = new Song
+            {
+                Artist = songDto.Artist,
+                Title = songDto.Title,
+                Length = songDto.Length,
+                Category = songDto.Category,
+                AlbumId = album.Id
+            };
+
             _context.Songs.Add(song);
             await _context.SaveChangesAsync();
 

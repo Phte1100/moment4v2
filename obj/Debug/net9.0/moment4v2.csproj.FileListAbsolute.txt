@@ -297,3 +297,4 @@ G:\.NET\moment4v2\obj\Debug\net9.0\refint\moment4v2.dll
 G:\.NET\moment4v2\obj\Debug\net9.0\moment4v2.pdb
 G:\.NET\moment4v2\obj\Debug\net9.0\moment4v2.genruntimeconfig.cache
 G:\.NET\moment4v2\obj\Debug\net9.0\ref\moment4v2.dll
+G:\.NET\moment4v2\obj\Debug\net9.0\moment4v2.sourcelink.json
