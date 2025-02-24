@@ -1,0 +1,1 @@
+Jag har skapat en webbapplikation med ASP.NET Core MVC utan views. I den här applikationen bygger jag ett API för att hantera data om låtar (Songs) och album (Albums). Jag använder Entity Framework Core (EF Core) för att kommunicera med databasen, som i mitt fall är SQLite. Dessutom har jag använt scaffolding.
